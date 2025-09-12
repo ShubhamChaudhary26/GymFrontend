@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
         {/* Center wrapper */}
         <div className="relative flex flex-col items-center justify-center h-full px-6">
           {/* Heading */}
-          <h1 className="absolute top-[22%] md:top-[20%] text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight opacity-80 z-0 text-center px-4">
+          <h1 className="absolute top-[22%] md:top-[12%] text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight opacity-80 z-0 text-center px-4">
             Sculpt <span className="text-lime-400">Your</span> Body,
             <br />
             Elevate <span className="text-lime-400">Your</span> Spirit
