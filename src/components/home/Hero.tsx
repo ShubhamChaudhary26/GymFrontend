@@ -51,7 +51,7 @@ const HomePage: React.FC = () => {
               <p>Kcal</p>
               <p>550</p>
             </div>
-            <div className="absolute bottom-[14%] left-[59.5%] bg-gradient-to-br from-gray-800 to-black text-lime-400 border-2 border-lime-400 font-bold backdrop-blur-lg rounded-xl px-4 py-5 shadow-lg transform rotate-[25deg]">
+            <div className="absolute bottom-[14%] left-[60%] bg-gradient-to-br from-gray-800 to-black text-lime-400 border-2 border-lime-400 font-bold backdrop-blur-lg rounded-xl px-4 py-5 shadow-lg transform rotate-[25deg]">
               <Image
                 src="/dumble.png"
                 alt="Sets"
