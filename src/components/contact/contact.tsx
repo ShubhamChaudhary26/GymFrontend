@@ -11,32 +11,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: "Visit Our Gym",
-    details: ["123 Fitness Street", "Gym City, GC 12345"],
-    description: "Come experience our state-of-the-art facilities",
-  },
-  {
-    icon: Phone,
-    title: "Call Us",
-    details: ["+1 (555) 123-4567", "+1 (555) 123-4568"],
-    description: "Speak with our fitness consultants",
-  },
-  {
-    icon: Mail,
-    title: "Email Us",
-    details: ["hello@fitnesselite.com", "support@fitnesselite.com"],
-    description: "Get answers to all your questions",
-  },
-  {
-    icon: Clock,
-    title: "Operating Hours",
-    details: ["Mon-Fri: 5:00 AM - 11:00 PM", "Sat-Sun: 6:00 AM - 10:00 PM"],
-    description: "We're here when you need us",
-  },
-];
+import { Globe } from "./map";
 
 // 🔹 Beautiful Button
 const Button = ({
@@ -148,45 +123,9 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
-            <p className="text-muted-foreground mb-8">
-              Whether you're a beginner or a seasoned athlete, our team is here
-              to guide you every step of the way. Reach out and let's discuss
-              how we can help you achieve your fitness goals.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {contactInfo.map((info, index) => (
-                <div
-                  key={index}
-                  className="section-card p-6 rounded-xl card-hover group bg-white/5 border border-white/10 backdrop-blur-md"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <info.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h4 className="font-bold mb-2 group-hover:text-neon transition-colors">
-                    {info.title}
-                  </h4>
-                  <div className="space-y-1 mb-3">
-                    {info.details.map((detail, i) => (
-                      <p key={i} className="text-sm text-white">
-                        {detail}
-                      </p>
-                    ))}
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    {info.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start  ">
           {/* Contact Form */}
-          <div className="section-card p-8 rounded-xl animate-scale-in bg-white/10 border border-white/20 backdrop-blur-md shadow-lg">
+          <div className="bg-white/10 p-8 rounded-2xl backdrop-blur-md shadow-lg h-[80vh] flex flex-col justify-between mt-10">
             {submitted ? (
               <div className="text-center p-8">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -201,7 +140,10 @@ const ContactSection = () => {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-6 flex-1 flex flex-col"
+              >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="relative">
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" />
@@ -240,7 +182,7 @@ const ContactSection = () => {
                   />
                 </div>
 
-                <div className="relative">
+                <div className="relative flex-1">
                   <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-white/60" />
                   <textarea
                     name="message"
@@ -248,8 +190,10 @@ const ContactSection = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={5}
-                    className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all backdrop-blur-md shadow-sm"
+                    className="w-full h-full min-h-[200px] pl-12 pr-4 py-3 bg-white/10 border border-white/20 
+                       rounded-xl text-white placeholder:text-white/60 focus:outline-none 
+                       focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all 
+                       backdrop-blur-md shadow-sm resize-none"
                   />
                 </div>
 
@@ -264,6 +208,10 @@ const ContactSection = () => {
                 </Button>
               </form>
             )}
+          </div>
+
+          <div className="px-4 py-3 flex items-start justify-center">
+            <Globe />
           </div>
         </div>
       </div>
