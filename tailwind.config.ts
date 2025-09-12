@@ -1,5 +1,10 @@
 import type { Config } from "tailwindcss";
 
+const colors = require("tailwindcss/colors");
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
+ 
 const config: Config = {
   darkMode: ["class"],
   content: [
@@ -9,13 +14,28 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
+      },
       keyframes: {
+        // Floating with -25deg rotation
+        floatNeg: {
+          '0%, 100%': { transform: 'rotate(-25deg) translateY(0px)' },
+          '50%': { transform: 'rotate(-25deg) translateY(-10px)' },
+        },
+        // Floating with 25deg rotation
+        floatPos: {
+          '0%, 100%': { transform: 'rotate(25deg) translateY(0px)' },
+          '50%': { transform: 'rotate(25deg) translateY(-10px)' },
+        },
         shine: {
           "0%": { backgroundPosition: "100%" },
           "100%": { backgroundPosition: "-100%" },
         },
       },
       animation: {
+        floatNeg: 'floatNeg 3s ease-in-out infinite',
+        floatPos: 'floatPos 3s ease-in-out infinite',
         shine: "shine 5s linear infinite",
       },
       backgroundImage: {
@@ -69,6 +89,7 @@ const config: Config = {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
+        default: "#A2CD04",
       },
     },
   },

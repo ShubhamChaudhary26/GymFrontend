@@ -7,7 +7,7 @@ import TestimonialsSection from "@/components/home/TestimonialsSection";
 import PricingSection from "@/components/Pricing/Price";
 import BlogSection from "@/components/Blog/BlogSection";
 import FAQSection from "@/components/faq/Faq";
-import ContactSection from "@/components/contact/contact";
+// import {ContactSection} from "@/components/contact/contact";
 import LogoLoop from "@/components/home/LogoLoop";
 import CircularGallery from "@/components/home/CircularGallery";
 import Lightning from '@/components/home/Lightning';
@@ -121,7 +121,7 @@ export default async function HomePage() {
       <PricingSection />
       <BlogSection />
       <FAQSection />
-      <ContactSection />
+      {/* <ContactSection /> */}
     </main>
   );
 }
