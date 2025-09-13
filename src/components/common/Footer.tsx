@@ -12,7 +12,7 @@ const Footer = () => {
             </h3>
             <p className="text-muted-foreground mb-6">
               Transform your body, elevate your spirit. Join the elite fitness community 
-              that's changing lives every day.
+              that&apos;s changing lives every day.
             </p>
             <div className="flex space-x-4">
               <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors cursor-pointer">

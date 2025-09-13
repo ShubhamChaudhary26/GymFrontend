@@ -46,7 +46,7 @@ export default function ServicesPage() {
         </h1>
         <p className="text-lg text-white/70 max-w-2xl mx-auto">
           Explore our range of fitness programs designed to help you become the
-          best version of yourself. Whether you're a beginner or a pro, we have
+          best version of yourself. Whether you&apos;re a beginner or a pro, we have
           something for everyone.
         </p>
       </div>

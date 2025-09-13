@@ -31,7 +31,7 @@ const CTASection = () => {
             </h2>
             
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Take the first step towards your best self. Join thousands who've already 
+              Take the first step towards your best self. Join thousands who&apos;ve already
               started their transformation journey with us.
             </p>
             

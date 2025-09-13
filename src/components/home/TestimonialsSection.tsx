@@ -40,11 +40,12 @@ const TestimonialsSection = () => {
         {/* Section Heading */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Your Success Stories, <span className="text-neon">Our Inspiration</span>
+            Your Success Stories,{" "}
+            <span className="text-neon">Our Inspiration</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Real transformations from real people who decided to change their lives.
-            Your success story could be next.
+            Real transformations from real people who decided to change their
+            lives. Your success story could be next.
           </p>
         </div>
 
@@ -59,19 +60,25 @@ const TestimonialsSection = () => {
               <Quote className="w-8 h-8 text-primary/30 mb-6 group-hover:text-primary transition-colors duration-300" />
 
               {/* Star Rating */}
-             <div className="flex items-center mb-4">
-  {[...Array(t.rating)].map((_, i) => (
-    <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400 drop-shadow-md" />
-  ))}
-</div>
-
+              <div className="flex items-center mb-4">
+                {[...Array(t.rating)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className="w-5 h-5 text-yellow-400 fill-yellow-400 drop-shadow-md"
+                  />
+                ))}
+              </div>
 
               {/* Testimonial Text */}
-              <p className="text-muted-foreground mb-6 leading-relaxed">"{t.text}"</p>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                "{t.text}"
+              </p>
 
               {/* Results Box */}
               <div className="bg-primary/10 rounded-lg p-4 mb-6 transition-all group-hover:bg-primary/20">
-                <div className="text-sm font-semibold text-primary mb-1">Results:</div>
+                <div className="text-sm font-semibold text-primary mb-1">
+                  Results:
+                </div>
                 <div className="text-sm text-neon font-bold">{t.results}</div>
               </div>
 
@@ -95,13 +102,16 @@ const TestimonialsSection = () => {
         <div className="text-center mt-16">
           <div className="section-card p-8 rounded-2xl max-w-4xl mx-auto shadow-lg shadow-primary/10">
             <h3 className="text-3xl font-bold mb-4">
-              Ready to Write Your <span className="text-neon">Success Story</span>?
+              Ready to Write Your{" "}
+              <span className="text-neon">Success Story</span>?
             </h3>
             <p className="text-muted-foreground mb-8">
-              Join thousands who&apos;ve already transformed their lives. Your journey starts
-              with a single decision.
+              Join thousands who&apos;ve already transformed their lives. Your
+              journey starts with a single decision.
             </p>
-            <button className="btn-hero">Start Your Transformation Today</button>
+            <button className="btn-hero">
+              Start Your Transformation Today
+            </button>
           </div>
         </div>
       </div>
