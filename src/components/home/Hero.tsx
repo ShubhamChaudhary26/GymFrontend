@@ -12,11 +12,11 @@ const HomePage: React.FC = () => {
         <Lightning hue={62} xOffset={0} speed={0.9} intensity={1} size={0.8} />
       </div>
 
-      <div className="relative w-full h-screen text-white overflow-hidden">
+      <div className="relative w-full h-screen text-white overflow-hidden ">
         {/* Center wrapper */}
-        <div className="relative flex flex-col items-center justify-center h-full px-4">
+        <div className="relative flex flex-col items-center justify-center h-full px-4 md:mb-20">
           {/* Heading */}
-          <h1 className="absolute top-[18%] md:top-[12%] text-3xl   md:text-7xl font-extrabold leading-tight opacity-80 z-0 text-center md:px-4">
+          <h1 className="absolute top-[12%] md:top-[12%] text-3xl   md:text-7xl font-extrabold leading-tight opacity-80 z-0 text-center md:px-4">
             Sculpt <span className="text-default">Your</span> Body,
             <br />
             Elevate <span className="text-default">Your</span> Spirit
@@ -124,7 +124,7 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Gym Image */}
-          <div className="absolute bottom-0 w-[450px] h-[400px] md:w-[650px] md:h-[550px] z-10">
+          <div className="absolute bottom-0 w-[450px] h-[540px] md:w-[650px] md:h-[550px] z-10">
             <Image
               src={gymPerson}
               alt="Gym Person"
