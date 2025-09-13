@@ -10,6 +10,7 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
+import Link from "next/link";
 import { useState } from "react";
 
 export function NavbarDemo() {
@@ -19,24 +20,28 @@ export function NavbarDemo() {
       link: "/",
     },
     {
+      name: "About Us",
+      link: "/about",
+    },
+    {
       name: "Services",
       link: "/services",
     },
+    // {
+    //   name: "Trainers",
+    //   link: "/trainers",
+    // },
     {
       name: "Memberships",
       link: "/memberships",
     },
     {
-      name: "About Us",
-      link: "/about",
+      name: "Blog",
+      link: "/blog",
     },
     {
       name: "Contact Us",
       link: "/contact",
-    },
-    {
-      name: "Blog",
-      link: "/blog",
     },
   ];
 
@@ -50,8 +55,8 @@ export function NavbarDemo() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-2">
-            <NavbarButton variant="secondary">Login</NavbarButton>
-            <NavbarButton variant="primary">Register</NavbarButton>
+            <NavbarButton variant="secondary"><Link href={"/login"} >Login</Link></NavbarButton>
+            <NavbarButton variant="primary"><Link href={'/register'}>Register</Link></NavbarButton>
           </div>
         </NavBody>
 

@@ -1,122 +1,76 @@
-import { Star, Quote } from "lucide-react";
+"use client";
+
+import React from "react";
+import { InfiniteMovingCards } from "../ui/infinite-moving-cards";
 
 const testimonials = [
   {
-    name: "Marcus Johnson",
-    role: "Software Engineer",
-    image: "https://source.unsplash.com/100x100/?man,fitness",
+    quote:
+      "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity...",
+    name: "Charles Dickens",
+    title: "A Tale of Two Cities",
     rating: 5,
-    text: "I have tried countless gyms and programs, but nothing comes close to this. Lost 45 pounds and gained incredible strength in just 6 months. The coaches genuinely care about your success.",
-    results: "Lost 45 lbs • Gained 15 lbs muscle",
   },
   {
-    name: "Sarah Chen",
-    role: "Marketing Director",
-    image: "https://source.unsplash.com/100x100/?woman,fitness",
-    rating: 5,
-    text: "The personalized approach changed everything for me. Not just my body, but my entire mindset. I am stronger and more confident than I have ever been in my life.",
-    results: "Body fat: 32% → 18%",
+    quote:
+      "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer the slings and arrows of outrageous fortune, or to take arms against a sea of troubles...",
+    name: "William Shakespeare",
+    title: "Hamlet",
+    rating: 4,
   },
   {
-    name: "David Rodriguez",
-    role: "Professional Athlete",
-    image: "https://source.unsplash.com/100x100/?athlete,gym",
+    quote:
+      "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife. Yet little is said of the fortune itself, or the desires of the man...",
+    name: "Jane Austen",
+    title: "Pride and Prejudice",
     rating: 5,
-    text: "Elite level training that pushed me beyond my limits. The attention to detail and scientific approach helped me reach peak performance I never thought possible.",
-    results: "Increased strength by 40%",
+  },
+  {
+    quote:
+      "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little...",
+    name: "Herman Melville",
+    title: "Moby-Dick",
+    rating: 4,
+  },
+  {
+    quote:
+      "In the middle of every difficulty lies opportunity. What appears as a stumbling block may very well be the stepping stone that leads you forward in ways you cannot yet imagine.",
+    name: "Albert Einstein",
+    title: "Philosopher of Science",
+    rating: 5,
+  },
+  {
+    quote:
+      "The only thing we have to fear is fear itself—nameless, unreasoning, unjustified terror which paralyzes needed efforts to convert retreat into advance.",
+    name: "Franklin D. Roosevelt",
+    title: "Inaugural Address, 1933",
+    rating: 4,
   },
 ];
 
-const TestimonialsSection = () => {
+
+
+export function InfiniteMovingCardsDemo() {
   return (
-    <section className="py-20 relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,hsl(120_100%_50%)_0%,transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,hsl(120_100%_50%)_0%,transparent_50%)]"></div>
+    <div className="py-20 flex flex-col items-center justify-center relative overflow-hidden bg-black">
+      {/* Section Title */}
+      <div className="text-center mb-12">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          What Our <span className="text-neon">Clients Say</span>
+        </h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          Real reviews from our valued members sharing their fitness journey and results.
+        </p>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Your Success Stories,{" "}
-            <span className="text-neon">Our Inspiration</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Real transformations from real people who decided to change their
-            lives. Your success story could be next.
-          </p>
-        </div>
-
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((t, index) => (
-            <div
-              key={index}
-              className="section-card p-8 rounded-xl card-hover relative overflow-hidden group"
-            >
-              {/* Quote Icon */}
-              <Quote className="w-8 h-8 text-primary/30 mb-6 group-hover:text-primary transition-colors duration-300" />
-
-              {/* Star Rating */}
-              <div className="flex items-center mb-4">
-                {[...Array(t.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-5 h-5 text-yellow-400 fill-yellow-400 drop-shadow-md"
-                  />
-                ))}
-              </div>
-
-              {/* Testimonial Text */}
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                "{t.text}"
-              </p>
-
-              {/* Results Box */}
-              <div className="bg-primary/10 rounded-lg p-4 mb-6 transition-all group-hover:bg-primary/20">
-                <div className="text-sm font-semibold text-primary mb-1">
-                  Results:
-                </div>
-                <div className="text-sm text-neon font-bold">{t.results}</div>
-              </div>
-
-              {/* User Info */}
-              <div className="flex items-center">
-                <img
-                  src={t.image}
-                  alt={t.name}
-                  className="w-12 h-12 rounded-full object-cover mr-4 border-2 border-primary/20"
-                />
-                <div>
-                  <div className="font-semibold">{t.name}</div>
-                  <div className="text-sm text-muted-foreground">{t.role}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center mt-16">
-          <div className="section-card p-8 rounded-2xl max-w-4xl mx-auto shadow-lg shadow-primary/10">
-            <h3 className="text-3xl font-bold mb-4">
-              Ready to Write Your{" "}
-              <span className="text-neon">Success Story</span>?
-            </h3>
-            <p className="text-muted-foreground mb-8">
-              Join thousands who&apos;ve already transformed their lives. Your
-              journey starts with a single decision.
-            </p>
-            <button className="btn-hero">
-              Start Your Transformation Today
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+      {/* Infinite Moving Cards */}
+      <InfiniteMovingCards
+        items={testimonials}
+        direction="right"
+        speed="slow"
+        pauseOnHover={true}
+        className="px-4"
+      />
+    </div>
   );
-};
-
-export default TestimonialsSection;
+}

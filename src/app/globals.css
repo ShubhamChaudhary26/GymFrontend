@@ -13,8 +13,8 @@
     --muted-foreground: 220 8.9% 46.1%;
     --shadow-neon: 0 0 20px hsl(120 100% 50% / 0.3);
     --shadow-dark: 0 10px 30px hsl(220 15% 4% / 0.8);
-    --gradient-dark: linear-gradient(180deg, hsl(220 15% 8%) 0%, hsl(220 15% 6%) 100%);
-    --gradient-neon: linear-gradient(135deg, hsl(120 100% 50%) 0%, hsl(120 80% 60%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(216, 100%, 1%) 0%, hsl(0, 0%, 0%) 100%);
+    --gradient-neon: linear-gradient(135deg, #A2CD04 0%, #A2CD04 100%);
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
     --secondary: 220 14.3% 95.9%;
@@ -98,12 +98,11 @@
     @apply inline-flex items-center justify-center px-8 py-4 rounded-lg font-bold transition-all duration-300;
     background: var(--gradient-neon);
     color: hsl(var(--primary-foreground));
-    box-shadow: var(--shadow-neon);
   }
 
   .btn-hero:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 40px hsl(120 100% 50% / 0.5);
+    
   }
 
   .btn-secondary {

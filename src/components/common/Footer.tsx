@@ -8,23 +8,23 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-bold mb-4">
-              <span className="text-neon">Fitness</span>Elite
+              <span className="text-default">Fitness</span>Elite
             </h3>
             <p className="text-muted-foreground mb-6">
               Transform your body, elevate your spirit. Join the elite fitness community 
               that&apos;s changing lives every day.
             </p>
             <div className="flex space-x-4">
-              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors cursor-pointer">
+              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-default transition-colors cursor-pointer">
                 <Instagram className="w-5 h-5 text-primary" />
               </div>
-              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors cursor-pointer">
+              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-default transition-colors cursor-pointer">
                 <Facebook className="w-5 h-5 text-primary" />
               </div>
-              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors cursor-pointer">
+              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-default transition-colors cursor-pointer">
                 <Twitter className="w-5 h-5 text-primary" />
               </div>
-              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors cursor-pointer">
+              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-default transition-colors cursor-pointer">
                 <Youtube className="w-5 h-5 text-primary" />
               </div>
             </div>
@@ -79,9 +79,9 @@ const Footer = () => {
                 <input 
                   type="email" 
                   placeholder="Your email"
-                  className="flex-1 px-3 py-2 bg-input border border-border rounded-l-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="flex-1 px-3 py-2 bg-input border border-border rounded-l-lg text-sm focus:outline-none focus:ring-1 focus:ring-default"
                 />
-                <button className="px-4 py-2 bg-primary text-primary-foreground rounded-r-lg hover:bg-primary/90 transition-colors">
+                <button className="px-4 py-2 bg-default text-primary-foreground rounded-r-lg hover:bg-default/90 transition-colors">
                   <Mail className="w-4 h-4 " />
                 </button>
               </div>

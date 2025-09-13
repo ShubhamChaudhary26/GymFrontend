@@ -56,110 +56,95 @@ const pricingPlans = [
   }
 ];
 
-const planId = "68bfb6d2024e3cc6dbfdce1b";
-
 const PricingSection = () => {
   const [order, setOrder] = useState<{ id: string; amount: number } | null>(null);
 
-  useEffect(() => {
-    const createOrder = async () => {
-      const res = await fetch("http://localhost:3000/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ planId }),
-        cache: "no-store",
-      });
-      const orderData = await res.json();
-      setOrder(orderData);
-    };
-    createOrder();
-  }, []);
-
+  
   return (
-    <section className="py-20 section-dark relative">
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent blur-3xl opacity-20 pointer-events-none"></div>
+   <section className="py-20 section-dark relative">
+  {/* Background Glow */}
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent blur-3xl opacity-20 pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          {order && <Checkout orderId={order.id} amount={order.amount} />}
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Your Fitness Goals, <span className="text-neon">Our Expertise</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Choose the perfect plan to match your ambition. Every membership includes 
-            our success guarantee and world-class support.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {pricingPlans.map((plan, index) => (
-            <div 
-              key={index}
-              className={`relative section-card p-8 rounded-2xl card-hover transition-transform duration-300 hover:scale-105 shadow-lg ${
-                plan.popular ? 'ring-2 ring-yellow-400 shadow-yellow-400/50' : ''
-              } ${plan.name === "Champion" ? "bg-gradient-to-b from-yellow-900/10 to-transparent border border-yellow-500/30 shadow-lg shadow-yellow-500/30" : ""}`}
-            >
-              {/* Floating Badge for Most Popular */}
-              {plan.popular && (
-                <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-6 py-2 rounded-full text-sm font-bold flex items-center shadow-lg animate-pulse">
-                    <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-700" />
-                    MOST POPULAR
-                  </div>
-                </div>
-              )}
-              
-              <div className="text-center mb-8">
-                <div className="flex items-center justify-center mb-4">
-                  {plan.name === "Champion" && (
-                    <Crown className="w-7 h-7 text-yellow-400 fill-yellow-400 drop-shadow-md mr-2" />
-                  )}
-                  <h3 className="text-2xl font-bold">{plan.name}</h3>
-                </div>
-                
-                <div className="mb-4">
-                  <span className="text-5xl font-bold text-neon">${plan.price}</span>
-                  <span className="text-muted-foreground">/{plan.period}</span>
-                </div>
-                
-                <p className="text-muted-foreground">{plan.description}</p>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl md:text-5xl font-bold mb-6">
+        Your Fitness Goals, <span className="text-neon">Our Expertise</span>
+      </h2>
+      <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        Choose the perfect plan to match your ambition. Every membership includes 
+        our success guarantee and world-class support.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {pricingPlans.map((plan, index) => (
+        <div
+          key={index}
+          className={`relative section-card p-8 rounded-2xl card-hover transition-transform duration-300 hover:scale-105 shadow-lg ${
+            plan.popular ? 'ring-2 ring-yellow-400 shadow-yellow-400/50' : ''
+          } ${plan.name === "Champion" ? "bg-gradient-to-b from-yellow-900/10 to-transparent border border-yellow-500/30 shadow-lg shadow-yellow-500/30" : ""}`}
+        >
+          {/* Popular Badge */}
+          {plan.popular && (
+            <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
+              <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-6 py-2 rounded-full text-sm font-bold flex items-center shadow-lg animate-pulse">
+                <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-700" />
+                MOST POPULAR
               </div>
-              
-              <ul className="space-y-4 mb-8">
-                {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-start">
-                    <Check className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              
-              <button 
-                className={`w-full py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 ${
-                  plan.popular 
-                    ? 'bg-gradient-to-r from-yellow-400 to-orange-400 text-black shadow-lg hover:shadow-yellow-400/50' 
-                    : 'btn-secondary'
-                }`}
-              >
-                {plan.cta}
-              </button>
             </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center space-x-2 text-sm text-muted-foreground">
-            <Check className="w-4 h-4 text-primary" />
-            <span>30-day money-back guarantee</span>
-            <span>•</span>
-            <span>Cancel anytime</span>
-            <span>•</span>
-            <span>No setup fees</span>
+          )}
+
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center mb-4">
+              {plan.name === "Champion" && (
+                <Crown className="w-7 h-7 text-yellow-400 fill-yellow-400 drop-shadow-md mr-2" />
+              )}
+              <h3 className="text-2xl font-bold">{plan.name}</h3>
+            </div>
+
+            <div className="mb-4">
+              <span className="text-5xl font-bold text-neon">${plan.price}</span>
+              <span className="text-muted-foreground">/{plan.period}</span>
+            </div>
+
+            <p className="text-muted-foreground">{plan.description}</p>
           </div>
+
+          <ul className="space-y-4 mb-8">
+            {plan.features.map((feature, i) => (
+              <li key={i} className="flex items-start">
+                <Check className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                <span className="text-sm">{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <button 
+            className={`w-full py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 ${
+              plan.popular 
+                ? 'bg-gradient-to-r from-yellow-400 to-orange-400 text-black shadow-lg hover:shadow-yellow-400/50' 
+                : 'btn-secondary hover:bg-primary/10'
+            }`}
+          >
+            {plan.cta}
+          </button>
         </div>
+      ))}
+    </div>
+
+    <div className="text-center mt-16">
+      <div className="inline-flex flex-wrap justify-center items-center space-x-2 text-sm text-muted-foreground">
+        <Check className="w-4 h-4 text-primary" />
+        <span>30-day money-back guarantee</span>
+        <span>•</span>
+        <span>Cancel anytime</span>
+        <span>•</span>
+        <span>No setup fees</span>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
   );
 };
 

@@ -4,7 +4,7 @@ const colors = require("tailwindcss/colors");
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
- 
+
 const config: Config = {
   darkMode: ["class"],
   content: [
@@ -18,15 +18,20 @@ const config: Config = {
         input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
       },
       keyframes: {
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
         // Floating with -25deg rotation
         floatNeg: {
-          '0%, 100%': { transform: 'rotate(-25deg) translateY(0px)' },
-          '50%': { transform: 'rotate(-25deg) translateY(-10px)' },
+          "0%, 100%": { transform: "rotate(-25deg) translateY(0px)" },
+          "50%": { transform: "rotate(-25deg) translateY(-10px)" },
         },
         // Floating with 25deg rotation
         floatPos: {
-          '0%, 100%': { transform: 'rotate(25deg) translateY(0px)' },
-          '50%': { transform: 'rotate(25deg) translateY(-10px)' },
+          "0%, 100%": { transform: "rotate(25deg) translateY(0px)" },
+          "50%": { transform: "rotate(25deg) translateY(-10px)" },
         },
         shine: {
           "0%": { backgroundPosition: "100%" },
@@ -34,9 +39,11 @@ const config: Config = {
         },
       },
       animation: {
-        floatNeg: 'floatNeg 3s ease-in-out infinite',
-        floatPos: 'floatPos 3s ease-in-out infinite',
+        floatNeg: "floatNeg 3s ease-in-out infinite",
+        floatPos: "floatPos 3s ease-in-out infinite",
         shine: "shine 5s linear infinite",
+        scroll:
+          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

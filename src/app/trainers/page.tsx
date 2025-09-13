@@ -1,9 +1,9 @@
-import Trainers from '@/components/TrainersPage/Trainers'
+import MainTrainer from '@/components/TrainersPage/MainTrainer'
 import React from 'react'
 
 const page = () => {
   return (
-    <div><Trainers /></div>
+    <div><MainTrainer/></div>
   )
 }
 

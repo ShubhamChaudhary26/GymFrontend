@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
         {/* Center wrapper */}
         <div className="relative flex flex-col items-center justify-center h-full px-4 md:mb-20">
           {/* Heading */}
-          <h1 className="absolute top-[12%] md:top-[12%] text-3xl   md:text-7xl font-extrabold leading-tight opacity-80 z-0 text-center md:px-4">
+          <h1 className="absolute top-[14%] md:top-[14%] text-5xl   md:text-7xl font-extrabold leading-tight opacity-80 z-0 text-center md:px-4">
             Sculpt <span className="text-default">Your</span> Body,
             <br />
             Elevate <span className="text-default">Your</span> Spirit
@@ -53,7 +53,7 @@ const HomePage: React.FC = () => {
               <p>550</p>
             </div>
 
-            <div className="absolute bottom-[14%] left-[65%] text-default border-2 border-default font-bold backdrop-blur-md rounded-xl px-4 py-5 shadow-lg transform rotate-[25deg] animate-floatPos">
+            <div className="absolute bottom-[12%] left-[65%] text-default border-2 border-default font-bold backdrop-blur-md rounded-xl px-4 py-5 shadow-lg transform rotate-[25deg] animate-floatPos">
               <Image
                 src="/dumble.png"
                 alt="Sets"
@@ -67,7 +67,7 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Bottom Section */}
-          <div className="absolute bottom-0 md:bottom-6 w-full flex flex-col-reverse md:flex-row md:justify-between md:items-end px-1 md:px-6 z-20">
+          <div className="absolute bottom-20 md:bottom-6 w-full flex flex-col-reverse md:flex-row md:justify-between md:items-end px-1 md:px-6 z-20">
             {/* Left Avatars + Text */}
             <div className="flex items-center space-x-2 md:space-x-4">
               {/* Avatars */}
@@ -124,7 +124,7 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Gym Image */}
-          <div className="absolute bottom-0 w-[450px] h-[540px] md:w-[650px] md:h-[550px] z-10">
+          <div className="absolute md:bottom-0 bottom-[85px] w-[450px] h-[600px] as md:w-[650px] md:ml-5  md:h-[480px] z-10">
             <Image
               src={gymPerson}
               alt="Gym Person"

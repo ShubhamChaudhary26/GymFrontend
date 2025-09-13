@@ -2,8 +2,6 @@
 import React, { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import createGlobe from "cobe";
-import { motion } from "motion/react";
-import { IconBrandYoutubeFilled } from "@tabler/icons-react";
 
 export const Globe = ({ className }: { className?: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -24,7 +22,7 @@ export const Globe = ({ className }: { className?: string }) => {
       mapSamples: 16000,
       mapBrightness: 6,
       baseColor: [0.3, 0.3, 0.3],
-      markerColor: [0.1, 0.8, 1],
+     markerColor: [0.64, 0.80, 0.02],
       glowColor: [0.4, 0.4, 0.4],
       markers: [
         // longitude latitude
@@ -46,7 +44,7 @@ export const Globe = ({ className }: { className?: string }) => {
   return (
     <canvas
       ref={canvasRef}
-      style={{ width: 600, height: 600, maxWidth: "100%", aspectRatio: 1 }}
+      style={{ width: 620, height: 620, maxWidth: "100%", aspectRatio: 1 }}
       className={className}
     />
   );

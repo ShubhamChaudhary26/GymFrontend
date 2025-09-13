@@ -1,47 +1,68 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import Image from "next/image";
 
 const faqs = [
   {
     question: "What makes your fitness programs different?",
-    answer: "Our programs combine scientifically-proven methodologies with personalized coaching. Each plan is tailored to your specific goals, fitness level, and lifestyle. We focus on sustainable results rather than quick fixes, ensuring long-term success and health."
+    answer:
+      "Our programs combine scientifically-proven methodologies with personalized coaching. Each plan is tailored to your specific goals, fitness level, and lifestyle. We focus on sustainable results rather than quick fixes, ensuring long-term success and health.",
+    image: "/banner.png",
   },
   {
     question: "Do I need prior fitness experience to join?",
-    answer: "Not at all! Our programs cater to all fitness levels, from complete beginners to advanced athletes. Our certified trainers will assess your current fitness level and create a program that challenges you appropriately while ensuring safety and progress."
+    answer:
+      "Our programs combine scientifically-proven methodologies with personalized coaching. Each plan is tailored to your specific goals, fitness level, and lifestyle. We focus on sustainable results rather than quick fixes, ensuring long-term success and health.",
+    image:
+      "https://images.unsplash.com/photo-1558611848-73f7eb4001a1?q=80&w=1000&auto=format&fit=crop",
   },
   {
     question: "What's included in the membership?",
-    answer: "All memberships include access to our state-of-the-art facilities, group classes, mobile app, basic nutrition guidance, and progress tracking. Higher tiers include personal training sessions, custom meal plans, and priority support."
+    answer:
+      "Our programs combine scientifically-proven methodologies with personalized coaching. Each plan is tailored to your specific goals, fitness level, and lifestyle. We focus on sustainable results rather than quick fixes, ensuring long-term success and health.",
+    image:
+      "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=1000&auto=format&fit=crop",
   },
   {
     question: "How quickly will I see results?",
-    answer: "Most members notice improvements in energy and strength within 2-3 weeks. Visible physical changes typically occur within 4-6 weeks of consistent training. Remember, sustainable transformation is a journey, not a sprint."
+    answer:
+      "Our programs combine scientifically-proven methodologies with personalized coaching. Each plan is tailored to your specific goals, fitness level, and lifestyle. We focus on sustainable results rather than quick fixes, ensuring long-term success and health.",
+    image:
+      "https://images.unsplash.com/photo-1579758629938-03607ccdbaba?q=80&w=1000&auto=format&fit=crop",
   },
   {
     question: "Can I freeze or cancel my membership?",
-    answer: "Yes, we offer flexible membership options. You can freeze your membership for up to 3 months per year for medical or travel reasons. Cancellations require 30 days notice, and we offer a 30-day money-back guarantee for new members."
+    answer:
+      "Our programs combine scientifically-proven methodologies with personalized coaching. Each plan is tailored to your specific goals, fitness level, and lifestyle. We focus on sustainable results rather than quick fixes, ensuring long-term success and health.",
+    image:
+      "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=1000&auto=format&fit=crop",
   },
   {
     question: "Do you provide nutrition guidance?",
-    answer: "Absolutely! All memberships include basic nutrition guidance. Our Elite and Champion tiers include custom meal planning and ongoing nutrition coaching to optimize your results and support your fitness goals."
-  }
+    answer:
+      "Our programs combine scientifically-proven methodologies with personalized coaching. Each plan is tailored to your specific goals, fitness level, and lifestyle. We focus on sustainable results rather than quick fixes, ensuring long-term success and health.",
+    image:
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1000&auto=format&fit=crop",
+  },
 ];
 
-const FAQItem = ({ faq, index }: { faq: typeof faqs[0]; index: number }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const FAQItem = ({
+  faq,
+  index,
+  isOpen,
+  onClick,
+}: {
+  faq: (typeof faqs)[0];
+  index: number;
+  isOpen: boolean;
+  onClick: () => void;
+}) => {
   return (
-    <div 
-      className="section-card rounded-xl overflow-hidden card-hover"
-      style={{
-        animation: `fade-in 0.5s ease-out ${index * 0.1}s both`
-      }}
-    >
+    <div className="section-card rounded-xl overflow-hidden border-none  ">
       <button
-        className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-primary/5 transition-colors"
-        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-6  py-4 text-left flex items-center justify-between hover:bg-primary/5 transition-colors"
+        onClick={onClick}
       >
         <h3 className="text-lg font-semibold pr-4">{faq.question}</h3>
         <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -52,44 +73,66 @@ const FAQItem = ({ faq, index }: { faq: typeof faqs[0]; index: number }) => {
           )}
         </div>
       </button>
-      
-      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-        <div className="px-8 pb-6">
-          <p className="text-muted-foreground leading-relaxed">
-            {faq.answer}
-          </p>
-        </div>
+
+      <div
+        className={`overflow-hidden transition-max-height duration-300 ${
+          isOpen ? "max-h-96" : "max-h-0"
+        }`}
+      >
+        {faq.answer && (
+          <div className="px-6 pb-4">
+            <p className="text-muted-foreground leading-relaxed text-gray-300">
+              {faq.answer}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 const FAQSection = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+
   return (
-    <section className="py-20 section-dark">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Frequently Asked <span className="text-neon">Questions</span>
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Get answers to common questions about our programs, memberships, and approach to fitness.
-          </p>
-        </div>
-        
-        <div className="space-y-4">
+    <section className="py-5 section-dark bg-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-start">
+        {/* Left FAQ Column */}
+        <div className="">
+          <div className="text-center md:text-left mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Frequently Asked <span className="text-default">Questions</span>
+            </h2>
+          </div>
+
           {faqs.map((faq, index) => (
-            <FAQItem key={index} faq={faq} index={index} />
+            <FAQItem
+              key={index}
+              faq={faq}
+              index={index}
+              isOpen={activeIndex === index}
+              onClick={() =>
+                setActiveIndex(activeIndex === index ? null : index)
+              }
+            />
           ))}
         </div>
-        
-        <div className="text-center mt-12">
-          <p className="text-muted-foreground mb-6">
-            Still have questions? We're here to help!
-          </p>
-          <button className="btn-hero">
-            Contact Our Team
-          </button>
+
+        {/* Right Image Column */}
+        <div className="flex justify-center md:justify-end md:mt-[18vh]">
+          {activeIndex !== null ? (
+            <Image
+              src={faqs[activeIndex].image}
+              alt={faqs[activeIndex].question}
+              width={500}
+              height={200}
+              className="rounded-xl shadow-lg object-contain w-full max-w-md md:h-[75vh] "
+            />
+          ) : (
+            <p className="text-muted-foreground text-center">
+              Select a question to see the related image.
+            </p>
+          )}
         </div>
       </div>
     </section>
