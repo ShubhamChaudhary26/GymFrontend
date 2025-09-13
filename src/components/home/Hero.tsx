@@ -119,7 +119,7 @@ const HomePage: React.FC = () => {
 
             {/* Button */}
             <button className="mt-5 bottom-2 md:mt-0 bg-default text-black font-bold md:px-8 md:py-3 px-3 py-1 rounded-full hover:scale-105 transition absolute md:static bottom-4 right-4">
-              Let's Start &gt;&gt;&gt;
+              Let&apos;s Start &gt;&gt;&gt;
             </button>
           </div>
 

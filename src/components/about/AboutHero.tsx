@@ -40,7 +40,7 @@ const AboutSection = () => {
 
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               <p className="text-lg">
-                For over 15 years, we've been the catalyst for incredible transformations.
+                For over 15 years, we&apos;ve been the catalyst for incredible transformations.
                 What started as a simple mission to help people get fit has evolved into
                 a movement that changes lives.
               </p>

@@ -6,7 +6,7 @@ const testimonials = [
     role: "Software Engineer",
     image: "https://source.unsplash.com/100x100/?man,fitness",
     rating: 5,
-    text: "I've tried countless gyms and programs, but nothing comes close to this. Lost 45 pounds and gained incredible strength in just 6 months. The coaches genuinely care about your success.",
+    text: "I have tried countless gyms and programs, but nothing comes close to this. Lost 45 pounds and gained incredible strength in just 6 months. The coaches genuinely care about your success.",
     results: "Lost 45 lbs • Gained 15 lbs muscle",
   },
   {
@@ -14,7 +14,7 @@ const testimonials = [
     role: "Marketing Director",
     image: "https://source.unsplash.com/100x100/?woman,fitness",
     rating: 5,
-    text: "The personalized approach changed everything for me. Not just my body, but my entire mindset. I'm stronger and more confident than I've ever been in my life.",
+    text: "The personalized approach changed everything for me. Not just my body, but my entire mindset. I am stronger and more confident than I have ever been in my life.",
     results: "Body fat: 32% → 18%",
   },
   {
@@ -98,7 +98,7 @@ const TestimonialsSection = () => {
               Ready to Write Your <span className="text-neon">Success Story</span>?
             </h3>
             <p className="text-muted-foreground mb-8">
-              Join thousands who've already transformed their lives. Your journey starts
+              Join thousands who&apos;ve already transformed their lives. Your journey starts
               with a single decision.
             </p>
             <button className="btn-hero">Start Your Transformation Today</button>

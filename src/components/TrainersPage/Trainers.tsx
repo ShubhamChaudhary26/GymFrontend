@@ -51,8 +51,8 @@ export default function TrainersPage() {
         </h1>
         <p className="text-lg text-white/70 max-w-2xl mx-auto">
           Our certified trainers bring years of expertise to help you transform
-          your body and mind. Whether it's strength, flexibility, or endurance,
-          we’ve got the perfect coach for you.
+          your body and mind. Whether it&apos;s strength, flexibility, or endurance,
+          we&apos;ve got the perfect coach for you.
         </p>
       </div>
 
