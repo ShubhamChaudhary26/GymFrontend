@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 export type LogoItem =
@@ -307,7 +308,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           : ((item as any).alt ?? (item as any).title);
 
         const inner = (item as any).href ? (
-          <a
+          <Link
             className={cx(
               'inline-flex items-center no-underline rounded',
               'transition-opacity duration-200 ease-linear',
@@ -320,7 +321,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             rel="noreferrer noopener"
           >
             {content}
-          </a>
+          </Link>
         ) : (
           content
         );

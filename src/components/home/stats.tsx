@@ -35,7 +35,7 @@ const CounterAnimation = ({ target, suffix }: { target: number; suffix: string }
 
 const StatsSection = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className=" relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(120_100%_50%)_0%,transparent_50%)]"></div>

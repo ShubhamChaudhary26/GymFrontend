@@ -4,6 +4,7 @@ import createGlobe from "cobe";
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { IconBrandYoutubeFilled } from "@tabler/icons-react";
+import Link from "next/link";
 
 
 export default function FeaturesSectionDemo() {
@@ -127,7 +128,7 @@ export const SkeletonOne = () => {
 
 export const SkeletonThree = () => {
   return (
-    <a
+    <Link
       href="https://www.youtube.com/watch?v=RPa3_AD1_Vs"
       target="__blank"
       className="relative flex gap-10  h-full group/image"
@@ -145,7 +146,7 @@ export const SkeletonThree = () => {
           />
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

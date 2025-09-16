@@ -8,9 +8,9 @@ const HomePage: React.FC = () => {
   return (
     <>
       {/* Background lightning */}
-      <div className="absolute top-0 left-0 w-full h-full -z-10">
+      {/* <div className="absolute top-0 left-0 w-full h-full -z-10">
         <Lightning hue={62} xOffset={0} speed={0.9} intensity={1} size={0.8} />
-      </div>
+      </div> */}
 
       <div className="relative w-full h-screen text-white overflow-hidden ">
         {/* Center wrapper */}

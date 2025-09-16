@@ -52,7 +52,7 @@ const testimonials = [
 
 export function InfiniteMovingCardsDemo() {
   return (
-    <div className="py-20 flex flex-col items-center justify-center relative overflow-hidden bg-black">
+    <div className=" flex flex-col items-center justify-center relative overflow-hidden bg-black">
       {/* Section Title */}
       <div className="text-center mb-12">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">

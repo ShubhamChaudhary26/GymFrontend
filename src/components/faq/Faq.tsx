@@ -95,7 +95,7 @@ const FAQSection = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-5 section-dark bg-black">
+    <section className=" section-dark bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-start">
         {/* Left FAQ Column */}
         <div className="">

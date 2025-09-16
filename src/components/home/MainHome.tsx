@@ -106,7 +106,9 @@ const MainHome = () => {
   return (
     <main>
       <Hero />
-      <StatsSection />
+      <div className="my-10">
+        <StatsSection />
+      </div>
       <div
         style={{ height: "100px", position: "relative", overflow: "hidden" }}
       >
@@ -125,22 +127,29 @@ const MainHome = () => {
           />
         </div>
       </div>
-      <div className="my-10">
-        <div style={{ height: "900px", position: "relative" }}>
-          <ChromaGrid
-            items={items}
-            radius={300}
-            damping={0.45}
-            fadeOut={0.6}
-            ease="power3.out"
-          />
-        </div>
+      <div className="relative my-10 h-auto md:h-auto sm:h-[2600px]">
+        <ChromaGrid
+          items={items}
+          radius={300}
+          damping={0.45}
+          fadeOut={0.6}
+          ease="power3.out"
+        />
       </div>
-      <PricingSection />
-      <BlogSection />
-      <FAQSection />
-      <InfiniteMovingCardsDemo />
-      <Contact />
+
+      <div className="my-10">
+        <PricingSection />
+      </div>
+      <div className="my-10">
+        <FAQSection />
+      </div>
+      <div className="my-10">
+        <InfiniteMovingCardsDemo />
+      </div>
+      <div className="my-10">
+        <BlogSection />
+      </div>
+      {/* <Contact /> */}
     </main>
   );
 };
