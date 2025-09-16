@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 const BlogSection = () => {
   const blogPosts = [
     {
@@ -41,10 +43,10 @@ const BlogSection = () => {
     <section className="py-20 bg-background relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Latest <span className="text-neon">Articles</span>
+          <h2 className="textHeadingmobile md:textHeadinglaptop">
+            Latest <span className="text-default">Articles</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="textafterHeading max-w-3xl mx-auto">
             Stay informed with expert tips, guides, and research-backed fitness
             insights.
           </p>
@@ -54,15 +56,15 @@ const BlogSection = () => {
           {blogPosts.map((post, index) => (
             <div
               key={index}
-              className="bg-card rounded-xl overflow-hidden shadow-lg card-hover"
+              className="bg-graydefault rounded-xl overflow-hidden shadow-lg card-hover flex flex-col"
             >
               <img
                 src={post.image}
                 alt={post.title}
                 className="w-full h-56 object-cover"
               />
-              <div className="p-6">
-                <span className="text-sm text-primary font-semibold">
+              <div className="p-6 flex flex-col flex-grow">
+                <span className="text-sm text-default font-semibold">
                   {post.category}
                 </span>
                 <h3 className="mt-2 text-2xl font-bold">{post.title}</h3>
@@ -72,6 +74,12 @@ const BlogSection = () => {
                   <span>
                     {post.date} • {post.readTime}
                   </span>
+                </div>
+                {/* View More Button */}
+                <div className="mt-6 justify-end text-end">
+                  <button className=" px-2 py-2 bg-default text-black rounded-lg transition">
+                    <Link href={"/blog"}>View More</Link>
+                  </button>
                 </div>
               </div>
             </div>

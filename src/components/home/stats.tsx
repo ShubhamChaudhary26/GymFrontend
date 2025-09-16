@@ -30,41 +30,38 @@ const CounterAnimation = ({ target, suffix }: { target: number; suffix: string }
     requestAnimationFrame(animate);
   }, [target]);
 
-  return <span className="text-4xl md:text-5xl font-bold text-neon">{count}{suffix}</span>;
+  return <span className="text-4xl md:text-5xl font-bold text-white">{count}{suffix}</span>;
 };
 
 const StatsSection = () => {
   return (
     <section className=" relative overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(120_100%_50%)_0%,transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,hsl(120_100%_50%)_0%,transparent_50%)]"></div>
-      </div>
+      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Title */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Numbers That <span className="text-neon">Speak Volumes</span>
+          <h2 className="textHeadingmobile md:textHeadinglaptop  ">
+            Numbers That <br className="md:hidden" /> <span className="text-default ">Speak Volumes</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="textafterHeading max-w-3xl mx-auto">
             Our track record speaks for itself. Join a community that delivers real results.
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 ">
           {stats.map((stat, index) => (
             <div key={index} className="text-center group cursor-pointer">
-              <div className="section-card p-8 rounded-xl card-hover mb-4 relative overflow-hidden transition-transform duration-500 group-hover:scale-105">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className=" bg-graydefault section-card p-8 rounded-xl card-hover mb-4 relative overflow-hidden transition-transform duration-500 group-hover:scale-105">
+                <div className="absolute inset-0 bg-gradient-to-br from-default/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10">
-                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
-                    <stat.icon className="w-8 h-8 text-primary transition-transform duration-300 group-hover:scale-125" />
+                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-default/10 flex items-center justify-center transition-all duration-300 bg-default group-hover:scale-110">
+                    <stat.icon className="w-8 h-8 text-default transition-transform duration-300 group-hover:scale-125" />
                   </div>
                   <CounterAnimation target={stat.value} suffix={stat.suffix} />
-                  <h3 className="text-xl font-bold mt-4 mb-2 transition-colors group-hover:text-neon">{stat.label}</h3>
+                  <h3 className="text-xl font-bold mt-4 mb-2 transition-colors text-white">{stat.label}</h3>
                   <p className="text-muted-foreground text-sm">{stat.description}</p>
                 </div>
               </div>

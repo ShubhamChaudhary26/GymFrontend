@@ -55,10 +55,10 @@ export function InfiniteMovingCardsDemo() {
     <div className=" flex flex-col items-center justify-center relative overflow-hidden bg-black">
       {/* Section Title */}
       <div className="text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-          What Our <span className="text-neon">Clients Say</span>
+        <h2 className="textHeadingmobile md:textHeadinglaptop">
+          What Our <span className="text-default">Clients Say</span>
         </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+        <p className="textafterHeading max-w-2xl mx-auto ">
           Real reviews from our valued members sharing their fitness journey and results.
         </p>
       </div>

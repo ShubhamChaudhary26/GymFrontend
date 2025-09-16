@@ -91,6 +91,15 @@
   .border-border {
     border-color: hsl(220 15% 20%);
   }
+  .textHeadinglaptop{
+     @apply text-5xl font-bold mb-5;
+  }
+  .textHeadingmobile{
+    @apply text-3xl font-bold mb-2;
+  }
+  .textafterHeading{
+    @apply text-base text-gray-300 
+  }
 }
 
 @layer components {
@@ -117,10 +126,6 @@
     box-shadow: var(--shadow-neon);
   }
 
-  .text-neon {
-    color: hsl(var(--primary));
-    text-shadow: 0 0 10px hsl(120 100% 50% / 0.5);
-  }
 
   .section-card {
     background: hsl(var(--card));

@@ -58,7 +58,7 @@ const ProgramsSection = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Train Smarter,{" "}
-            <span className="text-neon">Unleash Your Potential</span>
+            <span className="text-default">Unleash Your Potential</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Choose from our scientifically-designed programs, each crafted to
@@ -94,7 +94,7 @@ const ProgramsSection = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-neon transition-colors">
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-default transition-colors">
                   {program.title}
                 </h3>
 

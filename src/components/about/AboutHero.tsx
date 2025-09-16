@@ -35,7 +35,7 @@ const AboutSection = () => {
         <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
           <div className="mb-12 lg:mb-0">
             <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              Inspired to <span className="text-neon">Inspire Your Best Self</span>
+              Inspired to <span className="text-default">Inspire Your Best Self</span>
             </h2>
 
             <div className="space-y-6 text-muted-foreground leading-relaxed">
@@ -77,7 +77,7 @@ const AboutSection = () => {
                   <value.icon className="w-6 h-6 text-primary" />
                 </div>
 
-                <h3 className="text-lg font-bold mb-3 group-hover:text-neon transition-colors">
+                <h3 className="text-lg font-bold mb-3 group-hover:text-default transition-colors">
                   {value.title}
                 </h3>
 

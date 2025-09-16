@@ -149,10 +149,15 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
   return (
     <div className="max-w-7xl mx-auto py-10 px-6">
       {/* Heading */}
-      <h2 className="text-3xl md:text-4xl font-bold text-[#A2CD04] mb-2 text-center">
-        Our Trainers
-      </h2>
-      <p className="text-center text-gray-300 mb-8">
+      <h2 className="textHeadingmobile md:textHeadinglaptop font-bold text-center mb-2">
+  Here Are
+  <br className="block md:hidden" />
+  <span className="md:textHeadinglaptop textHeadingmobile font-bold text-default ml-2">
+    Our Trainers
+  </span>
+</h2>
+
+      <p className="text-center textafterHeading text-gray-300 mb-8">
         Meet our expert trainers who will help you achieve your fitness goals.
       </p>
 

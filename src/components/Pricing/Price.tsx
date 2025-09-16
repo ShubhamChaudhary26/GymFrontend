@@ -86,13 +86,13 @@ const PricingPage = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-950 relative text-white">
+    <section className="py-10  relative text-white">
       {/* Header */}
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        <h2 className="textHeadingmobile md:textHeadinglaptop ">
           Your Fitness Goals, <span className="text-default">Our Expertise</span>
         </h2>
-        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+        <p className="textafterHeading max-w-2xl mx-auto">
           Choose the perfect plan to match your ambition. Every membership comes 
           with our success guarantee and world-class support.
         </p>
@@ -106,7 +106,7 @@ const PricingPage = () => {
             className={`relative p-8 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105 ${
               plan.popular
                 ? "bg-gradient-to-b from-yellow-900/30 to-gray-900 border border-yellow-500/30 ring-2 ring-default"
-                : "bg-gray-900 border border-gray-800"
+                : "bg-graydefault border border-grayborder"
             }`}
           >
             {/* Popular Badge */}

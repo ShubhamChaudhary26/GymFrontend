@@ -97,6 +97,8 @@ const config: Config = {
           5: "hsl(var(--chart-5))",
         },
         default: "#A2CD04",
+        graydefault: "#111827",
+        grayborder: "#1f2937",
       },
     },
   },

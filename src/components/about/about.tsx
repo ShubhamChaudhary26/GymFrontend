@@ -35,10 +35,10 @@ const about = () => {
   return (
     <>
       <ProgramsSection />
-      <div style={{ height: "900px", position: "relative" }}>
+      <div className="relative h-[600px] md:h-[900px]">
         <InfiniteMenu items={items} />
       </div>
-      <GlowingEffectDemo />
+      {/* <GlowingEffectDemo /> */}
       <AboutSection />
       <GallerySection />
     </>

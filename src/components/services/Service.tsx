@@ -27,7 +27,7 @@ const CTASection = () => {
           
           <div className="relative z-10">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Connect. Engage. <span className="text-neon">Transform.</span>
+              Connect. Engage. <span className="text-default">Transform.</span>
             </h2>
             
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">

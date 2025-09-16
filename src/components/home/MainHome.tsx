@@ -106,9 +106,7 @@ const MainHome = () => {
   return (
     <main>
       <Hero />
-      <div className="my-10">
-        <StatsSection />
-      </div>
+
       <div
         style={{ height: "100px", position: "relative", overflow: "hidden" }}
       >
@@ -136,7 +134,9 @@ const MainHome = () => {
           ease="power3.out"
         />
       </div>
-
+      <div className="my-10">
+        <StatsSection />
+      </div>
       <div className="my-10">
         <PricingSection />
       </div>

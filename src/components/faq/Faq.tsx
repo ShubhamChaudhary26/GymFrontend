@@ -96,14 +96,14 @@ const FAQSection = () => {
 
   return (
     <section className=" section-dark bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-start">
-        {/* Left FAQ Column */}
-        <div className="">
-          <div className="text-center md:text-left mb-8">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="text-center">
+            <h2 className="textHeadingmobile md:textHeadinglaptop">
               Frequently Asked <span className="text-default">Questions</span>
             </h2>
           </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-start mt-10">
+        {/* Left FAQ Column */}
+        <div className="text-center justify-center ">
 
           {faqs.map((faq, index) => (
             <FAQItem
@@ -119,7 +119,7 @@ const FAQSection = () => {
         </div>
 
         {/* Right Image Column */}
-        <div className="flex justify-center md:justify-end md:mt-[18vh]">
+        <div className="flex justify-center md:justify-end md:mt-[8vh]">
           {activeIndex !== null ? (
             <Image
               src={faqs[activeIndex].image}

@@ -57,7 +57,7 @@ const GallerySection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Experience Fitness <span className="text-neon">Like Never Before</span>
+            Experience Fitness <span className="text-default">Like Never Before</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Take a virtual tour of our facilities and see our community in action. 
@@ -89,7 +89,7 @@ const GallerySection = () => {
                 )}
                 
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-neon transition-colors">
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-default transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-white/80 text-sm">
