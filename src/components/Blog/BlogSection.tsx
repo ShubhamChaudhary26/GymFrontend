@@ -1,43 +1,63 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import axios from "axios";
 
-const BlogSection = () => {
-  const blogPosts = [
-    {
-      title: "5 Science-Backed Ways to Boost Your Metabolism",
-      excerpt:
-        "Discover the latest research on metabolic enhancement and how to implement these strategies in your daily routine for maximum fat burning potential.",
-      author: "Dr. Sarah Johnson",
-      date: "Dec 15, 2024",
-      readTime: "7 min read",
-      category: "Nutrition",
-      image:
-        "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      title: "The Ultimate Guide to Progressive Overload",
-      excerpt:
-        "Master the fundamental principle that drives muscle growth and strength gains. Learn how to systematically increase training demands for continuous progress.",
-      author: "Mike Rodriguez",
-      date: "Dec 12, 2024",
-      readTime: "12 min read",
-      category: "Training",
-      image:
-        "https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      title: "Mental Health Benefits of Regular Exercise",
-      excerpt:
-        "Explore the powerful connection between physical activity and mental wellness. Understand how exercise can be your best tool for stress management.",
-      author: "Lisa Chen",
-      date: "Dec 10, 2024",
-      readTime: "9 min read",
-      category: "Wellness",
-      image:
-        "https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=800&q=80",
-    },
-  ];
+interface Blog {
+  _id: string;
+  title: string;
+  excerpt: string;
+  author: string;
+  date: string;
+  readTime: string;
+  category: string;
+  image: string;
+}
+
+interface BlogSectionProps {
+  limit?: number; // optional prop for showing only first N blogs
+}
+
+const BlogSection = ({ limit }: BlogSectionProps) => {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/v1/blogs");
+        let allBlogs = res.data?.data || [];
+        // Sort by date descending
+        allBlogs = allBlogs.sort(
+          (a: Blog, b: Blog) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+        if (limit) allBlogs = allBlogs.slice(0, limit);
+        setBlogs(allBlogs);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, [limit]);
+
+  if (loading) {
+    return (
+      <div className="text-center py-20">
+        <p>Loading blogs...</p>
+      </div>
+    );
+  }
+
+  if (!blogs.length) {
+    return (
+      <div className="text-center py-20">
+        <p>No blogs found</p>
+      </div>
+    );
+  }
 
   return (
     <section className="py-20 bg-background relative overflow-hidden">
@@ -53,16 +73,19 @@ const BlogSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
+          {blogs.map((post) => (
             <div
-              key={index}
+              key={post._id}
               className="bg-graydefault rounded-xl overflow-hidden shadow-lg card-hover flex flex-col"
             >
-              <img
-                src={post.image}
-                alt={post.title}
-                className="w-full h-56 object-cover"
-              />
+              <div className="relative w-full h-56 overflow-hidden rounded-t-xl bg-gray-100">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+
               <div className="p-6 flex flex-col flex-grow">
                 <span className="text-sm text-default font-semibold">
                   {post.category}
@@ -75,10 +98,9 @@ const BlogSection = () => {
                     {post.date} • {post.readTime}
                   </span>
                 </div>
-                {/* View More Button */}
                 <div className="mt-6 justify-end text-end">
-                  <button className=" px-2 py-2 bg-default text-black rounded-lg transition">
-                    <Link href={"/blog"}>View More</Link>
+                  <button className="px-2 py-2 bg-default text-black rounded-lg transition">
+                    <Link href={`/blog/${post._id}`}>View More</Link>
                   </button>
                 </div>
               </div>

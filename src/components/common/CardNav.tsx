@@ -27,14 +27,14 @@ export function NavbarDemo() {
       name: "Services",
       link: "/services",
     },
-    // {
-    //   name: "Trainers",
-    //   link: "/trainers",
-    // },
     {
-      name: "Memberships",
-      link: "/memberships",
+      name: "Trainers",
+      link: "/trainers",
     },
+    // {
+    //   name: "Memberships",
+    //   link: "/memberships",
+    // },
     {
       name: "Blog",
       link: "/blog",

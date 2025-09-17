@@ -1,4 +1,6 @@
-import React, { useRef, useEffect } from "react";
+"use client";
+
+import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 
 export interface ChromaItem {
@@ -19,6 +21,7 @@ export interface ChromaGridProps {
   damping?: number;
   fadeOut?: number;
   ease?: string;
+  limit?: number; // <-- Add limit prop
 }
 
 type SetterFn = (v: number | string) => void;
@@ -30,71 +33,41 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
   damping = 0.45,
   fadeOut = 0.6,
   ease = "power3.out",
+  limit = 5, // default limit
 }) => {
+  const [data, setData] = useState<ChromaItem[]>(items || []);
   const rootRef = useRef<HTMLDivElement>(null);
   const fadeRef = useRef<HTMLDivElement>(null);
   const setX = useRef<SetterFn | null>(null);
   const setY = useRef<SetterFn | null>(null);
   const pos = useRef({ x: 0, y: 0 });
 
-  const demo: ChromaItem[] = [
-    {
-      image: "https://i.pravatar.cc/300?img=8",
-      title: "Alex Rivera",
-      subtitle: "Full Stack Developer",
-      handle: "@alexrivera",
-      borderColor: "#4F46E5",
-      gradient: "linear-gradient(145deg,#4F46E5,#000)",
-      url: "https://github.com/",
-    },
-    {
-      image: "https://i.pravatar.cc/300?img=11",
-      title: "Jordan Chen",
-      subtitle: "DevOps Engineer",
-      handle: "@jordanchen",
-      borderColor: "#10B981",
-      gradient: "linear-gradient(210deg,#10B981,#000)",
-      url: "https://linkedin.com/in/",
-    },
-    {
-      image: "https://i.pravatar.cc/300?img=3",
-      title: "Morgan Blake",
-      subtitle: "UI/UX Designer",
-      handle: "@morganblake",
-      borderColor: "#F59E0B",
-      gradient: "linear-gradient(165deg,#F59E0B,#000)",
-      url: "https://dribbble.com/",
-    },
-    {
-      image: "https://i.pravatar.cc/300?img=16",
-      title: "Casey Park",
-      subtitle: "Data Scientist",
-      handle: "@caseypark",
-      borderColor: "#EF4444",
-      gradient: "linear-gradient(195deg,#EF4444,#000)",
-      url: "https://kaggle.com/",
-    },
-    {
-      image: "https://i.pravatar.cc/300?img=25",
-      title: "Sam Kim",
-      subtitle: "Mobile Developer",
-      handle: "@thesamkim",
-      borderColor: "#8B5CF6",
-      gradient: "linear-gradient(225deg,#8B5CF6,#000)",
-      url: "https://github.com/",
-    },
-    {
-      image: "https://i.pravatar.cc/300?img=60",
-      title: "Tyler Rodriguez",
-      subtitle: "Cloud Architect",
-      handle: "@tylerrod",
-      borderColor: "#06B6D4",
-      gradient: "linear-gradient(135deg,#06B6D4,#000)",
-      url: "https://aws.amazon.com/",
-    },
-  ];
-
-  const data = items?.length ? items : demo;
+  // Fetch backend trainers if no prop passed
+  useEffect(() => {
+    if (items?.length) return;
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/v1/trainers");
+        const json = await res.json();
+        // Map backend response to ChromaItem and apply limit
+        const mapped: ChromaItem[] = json.data
+          .slice(0, limit) // <-- limit applied here
+          .map((t: any) => ({
+            title: t.name,
+            subtitle: t.post,
+            handle: t.instagramId,
+            image: t.image,
+            url: "#",
+            borderColor: "#4F46E5",
+            gradient: "linear-gradient(145deg,#A2CD04,#000)",
+          }));
+        setData(mapped);
+      } catch (err) {
+        console.error("Error fetching trainers:", err);
+      }
+    };
+    fetchData();
+  }, [items, limit]);
 
   useEffect(() => {
     const el = rootRef.current;
@@ -135,8 +108,12 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
     });
   };
 
-  const handleCardClick = (url?: string) => {
-    if (url) window.open(url, "_blank", "noopener,noreferrer");
+  // Card click handler
+  const handleCardClick = (handle?: string) => {
+    if (handle) {
+      const instaUrl = `https://instagram.com/${handle}`;
+      window.open(instaUrl, "_blank", "noopener,noreferrer");
+    }
   };
 
   const handleCardMove: React.MouseEventHandler<HTMLElement> = (e) => {
@@ -147,21 +124,19 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-6">
-      {/* Heading */}
+     <div className="max-w-7xl mx-auto py-10 px-6">
       <h2 className="textHeadingmobile md:textHeadinglaptop font-bold text-center mb-2">
-  Here Are
-  <br className="block md:hidden" />
-  <span className="md:textHeadinglaptop textHeadingmobile font-bold text-default ml-2">
-    Our Trainers
-  </span>
-</h2>
+        Here Are
+        <br className="block md:hidden" />
+        <span className="md:textHeadinglaptop textHeadingmobile font-bold text-default ml-2">
+          Our Trainers
+        </span>
+      </h2>
 
       <p className="text-center textafterHeading text-gray-300 mb-8">
         Meet our expert trainers who will help you achieve your fitness goals.
       </p>
 
-      {/* The existing grid */}
       <div
         ref={rootRef}
         onPointerMove={handleMove}
@@ -179,7 +154,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
           <article
             key={i}
             onMouseMove={handleCardMove}
-            onClick={() => handleCardClick(c.url)}
+            onClick={() => handleCardClick(c.handle)} // <-- handle pass kiya
             className="group relative flex flex-col w-[300px] rounded-[20px] overflow-hidden border-2 border-transparent transition-colors duration-300 cursor-pointer"
             style={
               {
@@ -212,15 +187,10 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
                 </span>
               )}
               <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>
-              {c.location && (
-                <span className="text-[0.85rem] opacity-85 text-right">
-                  {c.location}
-                </span>
-              )}
             </footer>
           </article>
         ))}
-        {/* Existing fade & mask divs */}
+
         <div
           className="absolute inset-0 pointer-events-none z-30"
           style={{

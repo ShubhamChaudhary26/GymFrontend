@@ -127,11 +127,11 @@ const MainHome = () => {
       </div>
       <div className="relative my-10 h-auto md:h-auto sm:h-[2600px]">
         <ChromaGrid
-          items={items}
           radius={300}
-          damping={0.45}
-          fadeOut={0.6}
-          ease="power3.out"
+  damping={0.45}
+  fadeOut={0.6}
+  ease="power3.out"
+  limit={3} // sirf first 3 trainers
         />
       </div>
       <div className="my-10">
@@ -146,9 +146,10 @@ const MainHome = () => {
       <div className="my-10">
         <InfiniteMovingCardsDemo />
       </div>
-      <div className="my-10">
-        <BlogSection />
-      </div>
+     <div className="my-10">
+  <BlogSection limit={3} />
+</div>
+
       {/* <Contact /> */}
     </main>
   );
