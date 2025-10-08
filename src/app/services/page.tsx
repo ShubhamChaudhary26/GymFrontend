@@ -4,8 +4,12 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div><ServicesMain/></div>
+    <div>
+      <ServicesMain/>
+      {/* Services */}
+    </div>
   )
+
 }
 
 export default page

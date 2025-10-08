@@ -5,7 +5,7 @@ import { LoaderFourDemo } from "@/components/common/Loader";
 // ya phir LoaderFourDemo use karo
 
 export const metadata = {
-  title: "FiTusion | Gym Website",
+  title: "Veltrix | Gym Website",
   description: "Sculpt Your Body, Elevate Your Spirit",
 };
 
@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body>
         <NavbarDemo />
-        <LoaderFourDemo />  
+        {/* <LoaderFourDemo />   */}
         {children}
         <Footer />
       </body>

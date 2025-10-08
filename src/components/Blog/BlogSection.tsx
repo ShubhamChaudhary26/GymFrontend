@@ -30,7 +30,8 @@ const BlogSection = ({ limit }: BlogSectionProps) => {
         let allBlogs = res.data?.data || [];
         // Sort by date descending
         allBlogs = allBlogs.sort(
-          (a: Blog, b: Blog) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          (a: Blog, b: Blog) =>
+            new Date(b.date).getTime() - new Date(a.date).getTime()
         );
         if (limit) allBlogs = allBlogs.slice(0, limit);
         setBlogs(allBlogs);
@@ -78,11 +79,11 @@ const BlogSection = ({ limit }: BlogSectionProps) => {
               key={post._id}
               className="bg-graydefault rounded-xl overflow-hidden shadow-lg card-hover flex flex-col"
             >
-              <div className="relative w-full h-56 overflow-hidden rounded-t-xl bg-gray-100">
+              <div className="relative w-full h-56 rounded-t-xl bg-black flex items-center justify-center overflow-hidden">
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+                  className="max-w-full max-h-full object-contain transition-transform duration-300 hover:scale-105"
                 />
               </div>
 

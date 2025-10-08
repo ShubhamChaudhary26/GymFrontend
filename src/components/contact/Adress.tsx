@@ -20,13 +20,13 @@ export function Address() {
             Contact us anytime for guidance, tours, or membership queries. Our front desk staff is always ready to assist you.
           </p>
         </div>
-        <img
+        {/* <img
           src="/banner.png"
           width={400}
           height={400}
           alt="location"
           className="absolute -right-6 lg:-right-[10%] -bottom-6 object-contain rounded-2xl opacity-80 z-0"
-        />
+        /> */}
       </WobbleCard>
 
       {/* Email */}

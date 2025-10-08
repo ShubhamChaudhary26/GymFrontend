@@ -8,6 +8,7 @@ import LogoLoop from "@/components/home/LogoLoop";
 import Contact from "@/components/contact/contact";
 import { InfiniteMovingCardsDemo } from "./TestimonialsSection";
 import ChromaGrid from "../TrainersPage/TrainersGrid";
+import Products from "../Products/Product";
 
 const techLogos = [
   // Gym Nutrition / Fitness related with company logos
@@ -140,6 +141,11 @@ const MainHome = () => {
       <div className="my-10">
         <PricingSection />
       </div>
+      <div className="my-10 ">
+  <Products limit={6} />
+
+</div>
+
       <div className="my-10">
         <FAQSection />
       </div>
@@ -150,7 +156,7 @@ const MainHome = () => {
   <BlogSection limit={3} />
 </div>
 
-      {/* <Contact /> */}
+      <Contact />
     </main>
   );
 };
