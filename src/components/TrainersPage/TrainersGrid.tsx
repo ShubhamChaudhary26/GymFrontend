@@ -42,7 +42,6 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
   const setY = useRef<SetterFn | null>(null);
   const pos = useRef({ x: 0, y: 0 });
 
-  // Fetch backend trainers if no prop passed
   useEffect(() => {
     if (items?.length) return;
     const fetchData = async () => {
