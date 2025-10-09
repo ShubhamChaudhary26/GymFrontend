@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { StickyScrollRevealDemo } from "./Trainers";
-import ChromaGrid from "./TrainersGrid";
+import ChromaGridImport from "./TrainersGrid";
+const ChromaGrid = ChromaGridImport as unknown as React.ComponentType<any>;
 
 const MainTrainer = () => {
   return (
@@ -16,7 +16,6 @@ const MainTrainer = () => {
           />
         </div>
       </div>
-      <StickyScrollRevealDemo />
     </div>
   );
 };
