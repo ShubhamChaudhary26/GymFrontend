@@ -75,9 +75,9 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean }>,
-              { visible },
-            )
+            child as React.ReactElement<{ visible?: boolean }>,
+            { visible },
+          )
           : child,
       )}
     </motion.div>
@@ -87,23 +87,23 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
     <motion.div
-  animate={{
-    backdropFilter: visible ? "blur(10px)" : "none",
-    boxShadow: visible ? "0 0 24px rgba(34,42,53,0.06)" : "none",
-    y: visible ? 20 : 0,
-  }}
-  style={{
-    minWidth: "900px", // min width rakho
-    maxWidth: "1200px", // max width
-  }}
-  className={cn(
-    "relative z-[60] mx-auto flex w-full flex-row items-center justify-between rounded-full bg-transparent px-4 py-2 lg:flex dark:bg-transparent",
-    visible && "bg-default dark:bg-neutral-950/80",
-    className,
-  )}
->
-  {children}
-</motion.div>
+      animate={{
+        backdropFilter: visible ? "blur(10px)" : "none",
+        boxShadow: visible ? "0 0 24px rgba(34,42,53,0.06)" : "none",
+        y: visible ? 20 : 0,
+      }}
+      style={{
+        minWidth: "900px", // min width rakho
+        maxWidth: "1200px", // max width
+      }}
+      className={cn(
+        "relative z-[60] mx-auto flex w-full flex-row items-center justify-between rounded-full bg-transparent px-4 py-2 lg:flex dark:bg-transparent",
+        visible && "bg-default dark:bg-neutral-950/80",
+        className,
+      )}
+    >
+      {children}
+    </motion.div>
 
   );
 };
@@ -244,7 +244,7 @@ export const NavbarLogo = () => {
 
 export const NavbarButton = ({
   href,
-  as: Tag = "a",
+  as: Tag,
   children,
   className,
   variant = "primary",
@@ -255,10 +255,7 @@ export const NavbarButton = ({
   children: React.ReactNode;
   className?: string;
   variant?: "primary" | "secondary" | "dark" | "gradient";
-} & (
-  | React.ComponentPropsWithoutRef<"a">
-  | React.ComponentPropsWithoutRef<"button">
-)) => {
+} & React.ComponentPropsWithoutRef<"button">) => {
   const baseStyles =
     "px-4 py-2 rounded-md bg-default button bg-default text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
 
@@ -271,13 +268,22 @@ export const NavbarButton = ({
       "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]",
   };
 
+  const combinedClassName = cn(baseStyles, variantStyles[variant], className);
+
+  // If href is provided, use Link component
+  if (href) {
+    return (
+      <Link href={href} className={combinedClassName}>
+        {children}
+      </Link>
+    );
+  }
+
+  // Otherwise, render as button or custom tag
+  const Component = Tag || "button";
   return (
-    <Tag
-      href={href || undefined}
-      className={cn(baseStyles, variantStyles[variant], className)}
-      {...props}
-    >
+    <Component className={combinedClassName} {...props}>
       {children}
-    </Tag>
+    </Component>
   );
 };
