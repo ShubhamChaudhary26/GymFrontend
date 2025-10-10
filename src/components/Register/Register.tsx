@@ -1,7 +1,8 @@
+// app/register/page.tsx
 "use client";
-
 import { useState } from "react";
 import { User, Mail, Lock, UserPlus } from "lucide-react";
+import apiService from "@/lib/api";
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -36,21 +37,20 @@ export default function RegisterPage() {
       formData.append("password", form.password);
       if (form.avatar) formData.append("avatar", form.avatar);
 
-      const res = await fetch("http://localhost:3000/api/v1/users/register", {
-        method: "POST",
-        body: formData, // FormData automatically sets correct headers
-      });
+      // ✅ CORRECTED: Already returns parsed JSON
+      const data = await apiService.register(formData);
 
-      const data = await res.json();
+      // ❌ REMOVE THIS:
+      // const data = await res.json();
 
-      if (!res.ok) {
+      if (!data.success) {
         setError(data.message || "Registration failed");
       } else {
         alert("✅ Registration successful! Please login.");
         window.location.href = "/login";
       }
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -58,7 +58,6 @@ export default function RegisterPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black relative overflow-hidden px-4 mt-10">
-      {/* Background Glow */}
       <div className="absolute w-72 h-72 bg-green-400/20 blur-3xl rounded-full -top-20 -left-20"></div>
       <div className="absolute w-72 h-72 bg-green-400/10 blur-3xl rounded-full bottom-0 right-0"></div>
 
@@ -144,11 +143,18 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 md:py-3 btn-hero font-semibold rounded-xl hover:scale-105 flex items-center justify-center gap-2 transition-all"
+          className="w-full py-2 md:py-3 btn-hero font-semibold rounded-xl hover:scale-105 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
         >
           {loading ? "Registering..." : "Register"}
           {!loading && <UserPlus className="w-5 h-5" />}
         </button>
+
+        <p className="text-white/60 text-sm text-center">
+          Already have an account?{" "}
+          <a href="/login" className="text-green-400 hover:underline">
+            Login
+          </a>
+        </p>
       </form>
     </div>
   );
