@@ -35,6 +35,7 @@ const PricingPage = () => {
   };
 
   // Load Razorpay script dynamically
+<<<<<<< HEAD
   const loadRazorpayScript = (): Promise<boolean> => {
     return new Promise((resolve) => {
       // Check if already loaded
@@ -56,6 +57,21 @@ const PricingPage = () => {
       document.body.appendChild(script);
     });
   };
+=======
+ // frontend Razorpay load
+const loadRazorpayScript = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    const existingScript = document.querySelector("script[src='https://checkout.razorpay.com/v1/checkout.js']");
+    if (existingScript) return resolve(true);
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
+>>>>>>> 08acc081a8a9fd0dec26307241683483ec9ed159
 
   const openRazorpay = async (plan: any) => {
     // Check if user is logged in

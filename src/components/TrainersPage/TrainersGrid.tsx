@@ -1,224 +1,172 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
-import { gsap } from "gsap";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-export interface ChromaItem {
+interface Trainer {
+  _id: string;
+  name: string;
+  post: string;
   image: string;
-  title: string;
-  subtitle: string;
-  handle?: string;
-  location?: string;
-  borderColor?: string;
-  gradient?: string;
-  url?: string;
+  experience?: string;
+  description?: string;
 }
 
-export interface ChromaGridProps {
-  items?: ChromaItem[];
-  className?: string;
-  radius?: number;
-  damping?: number;
-  fadeOut?: number;
-  ease?: string;
-  limit?: number; // <-- Add limit prop
-}
-
-type SetterFn = (v: number | string) => void;
-
-const ChromaGrid: React.FC<ChromaGridProps> = ({
-  items,
-  className = "",
-  radius = 300,
-  damping = 0.45,
-  fadeOut = 0.6,
-  ease = "power3.out",
-  limit = 5, // default limit
-}) => {
-  const [data, setData] = useState<ChromaItem[]>(items || []);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const fadeRef = useRef<HTMLDivElement>(null);
-  const setX = useRef<SetterFn | null>(null);
-  const setY = useRef<SetterFn | null>(null);
-  const pos = useRef({ x: 0, y: 0 });
+export default function TrainersPage() {
+  const [trainers, setTrainers] = useState<Trainer[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    if (items?.length) return;
-    const fetchData = async () => {
+    const fetchTrainers = async () => {
       try {
         const res = await fetch("http://localhost:3000/api/v1/trainers");
-        const json = await res.json();
-        // Map backend response to ChromaItem and apply limit
-        const mapped: ChromaItem[] = json.data
-          .slice(0, limit) // <-- limit applied here
-          .map((t: any) => ({
-            title: t.name,
-            subtitle: t.post,
-            handle: t.instagramId,
-            image: t.image,
-            url: "#",
-            borderColor: "#4F46E5",
-            gradient: "linear-gradient(145deg,#A2CD04,#000)",
-          }));
-        setData(mapped);
+        if (!res.ok) throw new Error("Failed to fetch trainers");
+        const data = await res.json();
+        setTrainers(data.data || []);
       } catch (err) {
-        console.error("Error fetching trainers:", err);
+        setError("Failed to load trainers");
+      } finally {
+        setLoading(false);
       }
     };
-    fetchData();
-  }, [items, limit]);
-
-  useEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    setX.current = gsap.quickSetter(el, "--x", "px") as SetterFn;
-    setY.current = gsap.quickSetter(el, "--y", "px") as SetterFn;
-    const { width, height } = el.getBoundingClientRect();
-    pos.current = { x: width / 2, y: height / 2 };
-    setX.current(pos.current.x);
-    setY.current(pos.current.y);
+    fetchTrainers();
   }, []);
 
-  const moveTo = (x: number, y: number) => {
-    gsap.to(pos.current, {
-      x,
-      y,
-      duration: damping,
-      ease,
-      onUpdate: () => {
-        setX.current?.(pos.current.x);
-        setY.current?.(pos.current.y);
-      },
-      overwrite: true,
-    });
-  };
-
-  const handleMove = (e: React.PointerEvent) => {
-    const r = rootRef.current!.getBoundingClientRect();
-    moveTo(e.clientX - r.left, e.clientY - r.top);
-    gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
-  };
-
-  const handleLeave = () => {
-    gsap.to(fadeRef.current, {
-      opacity: 1,
-      duration: fadeOut,
-      overwrite: true,
-    });
-  };
-
-  // Card click handler
-  const handleCardClick = (handle?: string) => {
-    if (handle) {
-      const instaUrl = `https://instagram.com/${handle}`;
-      window.open(instaUrl, "_blank", "noopener,noreferrer");
-    }
-  };
-
-  const handleCardMove: React.MouseEventHandler<HTMLElement> = (e) => {
-    const c = e.currentTarget as HTMLElement;
-    const rect = c.getBoundingClientRect();
-    c.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-    c.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-  };
+ 
+  
+  if (error)
+    return (
+      <div className="bg-black min-h-screen flex items-center justify-center">
+        <div className="text-center bg-red-900/20 border border-red-500 rounded-lg p-8">
+          <p className="text-red-400 text-xl">{error}</p>
+        </div>
+      </div>
+    );
+  
+  if (!trainers.length)
+    return (
+      <div className="bg-black min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-400 text-xl">No trainers available</p>
+        </div>
+      </div>
+    );
 
   return (
-     <div className="max-w-7xl mx-auto py-10 px-6">
-      <h2 className="textHeadingmobile md:textHeadinglaptop font-bold text-center mb-2">
-        Here Are
-        <br className="block md:hidden" />
-        <span className="md:textHeadinglaptop textHeadingmobile font-bold text-default ml-2">
-          Our Trainers
-        </span>
-      </h2>
-
-      <p className="text-center textafterHeading text-gray-300 mb-8">
-        Meet our expert trainers who will help you achieve your fitness goals.
-      </p>
-
-      <div
-        ref={rootRef}
-        onPointerMove={handleMove}
-        onPointerLeave={handleLeave}
-        className={`relative w-full h-full flex flex-wrap justify-center items-start gap-20 ${className}`}
-        style={
-          {
-            "--r": `${radius}px`,
-            "--x": "50%",
-            "--y": "50%",
-          } as React.CSSProperties
-        }
-      >
-        {data.map((c, i) => (
-          <article
-            key={i}
-            onMouseMove={handleCardMove}
-            onClick={() => handleCardClick(c.handle)} // <-- handle pass kiya
-            className="group relative flex flex-col w-[300px] rounded-[20px] overflow-hidden border-2 border-transparent transition-colors duration-300 cursor-pointer"
-            style={
-              {
-                "--card-border": c.borderColor || "transparent",
-                background: c.gradient,
-                "--spotlight-color": "rgba(255,255,255,0.3)",
-              } as React.CSSProperties
-            }
-          >
-            <div
-              className="absolute inset-0 pointer-events-none transition-opacity duration-500 z-20 opacity-0 group-hover:opacity-100"
-              style={{
-                background:
-                  "radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)",
-              }}
-            />
-            <div className="relative z-10 flex-1 p-[10px] box-border">
-              <img
-                src={c.image}
-                alt={c.title}
-                loading="lazy"
-                className="w-full h-full object-cover rounded-[10px]"
-              />
-            </div>
-            <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
-              <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
-              {c.handle && (
-                <span className="text-[0.95rem] opacity-80 text-right">
-                  {c.handle}
-                </span>
-              )}
-              <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>
-            </footer>
-          </article>
-        ))}
-
-        <div
-          className="absolute inset-0 pointer-events-none z-30"
-          style={{
-            backdropFilter: "grayscale(1) brightness(0.78)",
-            WebkitBackdropFilter: "grayscale(1) brightness(0.78)",
-            background: "rgba(0,0,0,0.001)",
-            maskImage:
-              "radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,transparent 15%,rgba(0,0,0,0.10) 30%,rgba(0,0,0,0.22)45%,rgba(0,0,0,0.35)60%,rgba(0,0,0,0.50)75%,rgba(0,0,0,0.68)88%,white 100%)",
-            WebkitMaskImage:
-              "radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,transparent 15%,rgba(0,0,0,0.10) 30%,rgba(0,0,0,0.22)45%,rgba(0,0,0,0.35)60%,rgba(0,0,0,0.50)75%,rgba(0,0,0,0.68)88%,white 100%)",
-          }}
-        />
-        <div
-          ref={fadeRef}
-          className="absolute inset-0 pointer-events-none transition-opacity duration-[250ms] z-40"
-          style={{
-            backdropFilter: "grayscale(1) brightness(0.78)",
-            WebkitBackdropFilter: "grayscale(1) brightness(0.78)",
-            background: "rgba(0,0,0,0.001)",
-            maskImage:
-              "radial-gradient(circle var(--r) at var(--x) var(--y),white 0%,white 15%,rgba(255,255,255,0.90)30%,rgba(255,255,255,0.78)45%,rgba(255,255,255,0.65)60%,rgba(255,255,255,0.50)75%,rgba(255,255,255,0.32)88%,transparent 100%)",
-            WebkitMaskImage:
-              "radial-gradient(circle var(--r) at var(--x) var(--y),white 0%,white 15%,rgba(255,255,255,0.90)30%,rgba(255,255,255,0.78)45%,rgba(255,255,255,0.65)60%,rgba(255,255,255,0.50)75%,rgba(255,255,255,0.32)88%,transparent 100%)",
-            opacity: 1,
-          }}
-        />
+    <div className="bg-gradient-to-b from-black via-gray-900 to-black min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#A2CD04] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#A2CD04] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse delay-700"></div>
       </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header Section */}
+        <div className="text-center mb-16 animate-fade-in">
+          
+          <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-[#A2CD04] mb-4">
+            Meet Our Trainers
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            Certified professionals dedicated to transforming your fitness journey
+          </p>
+          
+          <div className="inline-block mb-4 mt-4">
+            <span className="bg-[#A2CD04]/20 text-[#A2CD04] px-4 py-2 rounded-full text-sm font-semibold tracking-wider uppercase">
+              Expert Team
+            </span>
+          </div>
+        </div>
+
+        {/* Trainers Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {trainers.map((t, index) => (
+            <div
+              key={t._id}
+              onClick={() => router.push(`/trainers/${t._id}`)}
+              className="group relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl shadow-2xl cursor-pointer overflow-hidden border border-gray-800 hover:border-[#A2CD04] transition-all duration-500 transform hover:-translate-y-2"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              {/* Glow Effect on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#A2CD04]/0 to-[#A2CD04]/0 group-hover:from-[#A2CD04]/20 group-hover:to-transparent transition-all duration-500 rounded-2xl"></div>
+              
+              {/* Image Container */}
+              <div className="relative h-80 w-full overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+                <img
+                  src={t.image || "/placeholder-trainer.jpg"}
+                  alt={t.name}
+                  className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
+                />
+                
+                {/* Badge Overlay */}
+                <div className="absolute top-4 right-4 z-20">
+                  <div className="bg-[#A2CD04] text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
+                    Pro Trainer
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Section */}
+              <div className="p-6 relative z-10">
+                <div className="mb-4">
+                  <h2 className="text-2xl font-bold text-white mb-2 group-hover:text-[#A2CD04] transition-colors duration-300">
+                    {t.name}
+                  </h2>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="h-1 w-8 bg-[#A2CD04] rounded-full"></div>
+                    <p className="text-[#A2CD04] font-semibold text-sm uppercase tracking-wide">
+                      {t.post}
+                    </p>
+                  </div>
+                  <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
+                    {t.description || "Passionate about helping clients achieve their fitness goals with personalized training."}
+                  </p>
+                </div>
+
+                {/* Footer Section */}
+                <div className="flex justify-between items-center pt-4 border-t border-gray-700 group-hover:border-[#A2CD04]/50 transition-colors duration-300">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-[#A2CD04] rounded-full animate-pulse"></div>
+                    <span className="text-gray-400 text-sm font-medium">
+                      {t.experience || "2+ years"}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-[#A2CD04] group-hover:bg-[#8EBF03] text-black font-bold py-2 px-5 rounded-lg transition-all duration-300 shadow-lg group-hover:shadow-[#A2CD04]/50">
+                    <span className="text-sm">View Profile</span>
+                    <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* Shimmer Effect */}
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+            </div>
+          ))}
+        </div>
+
+        
+      </div>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out;
+        }
+      `}</style>
     </div>
   );
-};
-
-export default ChromaGrid;
+}
